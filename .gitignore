@@ -1,0 +1,6 @@
+*build*
+.vscode/
+doc/html
+doc/latex
+doc/pocket/**
+*.ini
