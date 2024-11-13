@@ -29,6 +29,7 @@ limitations under the License.
 #include <condition_variable>
 #include <atomic>
 #include <queue>
+#include <unordered_map>
 
 #include "privmx/drv/net.h"
 
