@@ -296,6 +296,10 @@ int privmxDrvNet_httpRequest(privmxDrvNet_Http* http, const char* data, int data
         Poco::Net::HTTPResponse response;
         std::istream& stream = http->session->receiveResponse(response);
         std::string result;
+        std::streamsize len = response.getContentLength();
+        if (len != Poco::Net::HTTPMessage::UNKNOWN_CONTENT_LENGTH) {
+            result.reserve(response.getContentLength());
+        }
         Poco::StreamCopier::copyToString(stream, result);
         char* buf = reinterpret_cast<char*>(malloc(result.size()));
         memcpy(buf, result.data(), result.size());
