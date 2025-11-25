@@ -295,7 +295,8 @@ int privmxDrvNet_httpRequest(privmxDrvNet_Http* http, const char* data, int data
         os.write(data, datalen).flush();
         Poco::Net::HTTPResponse response;
         std::istream& stream = http->session->receiveResponse(response);
-        std::string result{std::istreambuf_iterator<char>(stream), std::istreambuf_iterator<char>()};
+        std::string result;
+        Poco::StreamCopier::copyToString(stream, result);
         char* buf = reinterpret_cast<char*>(malloc(result.size()));
         memcpy(buf, result.data(), result.size());
         *statusCode = response.getStatus();
